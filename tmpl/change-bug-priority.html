@@ -1,0 +1,12 @@
+
+<h1>Change the priority of <a href='/bug/{{.Bug.Bug.BugId}}'>{{.Bug.Title}}</a></h1>
+<form>
+<select name='priority'>
+{{$currentPriority := .Bug.Priority}}
+{{range $_, $priority := .Priorities}}
+<option value='{{$priority}}'
+{{if eq $priority $currentPriority}}selected{{end}}>{{$priority}}</value>
+{{end}}
+</select>
+<input type='submit' value='Change bug's priority'>
+</form>

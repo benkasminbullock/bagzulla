@@ -1,0 +1,12 @@
+<h1>Edit the title of bug {{.Bug.BugId}}</h1>
+
+<form action="../save/{{.Bug.BugId}}" method="POST">
+<div>
+<table>
+<tr>
+<th>Title</th>
+<td><input size=50 name='title' value="{{html .Title}}"></td>
+</table>
+</div>
+<div><input type="submit" value="Save"></div>
+</form>

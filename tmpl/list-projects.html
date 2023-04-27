@@ -1,0 +1,36 @@
+<h1>All projects</h1>
+<p>
+<a href='../add-project/'>Add a project</a>
+</p>
+<table class='all-projects'>
+<tr>
+<th>Name
+<th>Directory
+<th>Add a bug
+<th>Open bugs
+{{$OpenBugs := .OpenBugs}}
+{{$DisplayDir := .DisplayDir}}
+{{$ProjectNone := .ProjectNone}}
+{{range $index, $project := .Projects}}
+<tr>
+<td>
+<a href='../project/{{.ProjectId}}'>{{.Name}}</a>
+</td>
+<td>
+{{if .Directory}}
+<a href='{{$DisplayDir}}{{.Directory}}'>{{$project.Directory}}</a>
+{{else}}
+{{if ne .ProjectId $ProjectNone}}
+<a href='../change-project-directory/{{.ProjectId}}'>Set directory</a></td>
+{{end}}
+{{end}}
+</td>
+<td>
+<a href='../add-bug-to-project/{{.ProjectId}}'>New bug</a>
+</td>
+<td class='open-bugs'>
+{{GetArray $OpenBugs .ProjectId}}
+</td>
+</tr>
+{{end}}
+</table>

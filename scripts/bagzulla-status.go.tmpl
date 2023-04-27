@@ -1,0 +1,9 @@
+package main
+// A list of statuses of bugs
+
+var statuses = []string{
+[%- FOR status IN statuses -%]
+"[% status %]",
+[% END -%]
+}
+

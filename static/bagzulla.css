@@ -1,0 +1,188 @@
+.nav-options {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    clear: both;
+}
+
+.nav-menu {
+    clear: both;
+}
+
+.nav-options li {
+    list-style: none;
+    float: left;
+    margin: 0.5em;
+}
+
+.bug-list {
+    background: #f0f8ff;
+}
+
+table.bug-list {
+    border-collapse: collapse;
+    border-style: none;
+    border-width: 0px;
+    border-style: outset;
+}
+
+.bug-list th,.bug-list td {
+    border-width: 0px;
+    border-style: inset;
+    border-color: #333;
+    padding: 0.3333em;
+    font-size: 1.2em;
+}
+
+.bug-list tr: nth-child(odd) {
+    background-color: #fff8f0;
+}
+
+.proj-info {
+    background: #99ffff;
+}
+
+td.open-bugs {
+    text-align: right;
+    font-size: 1.1em;
+    padding: 0.25em;
+}
+
+/* This makes <pre> tags wrap the words within them. I am using <pre>
+   tags for the Description part of the bug report. */
+
+pre {
+    white-space: pre-wrap;
+}
+
+.bug-list tr.status-fixed, .status-fixed {
+    background: #BAA;
+}
+
+.bug-list tr.status-invalid, .status-invalid {
+    background: #DAA;
+}
+
+.bug-list tr.status-stalled, .status-stalled {
+    background: #EF8;
+}
+
+.bug-list tr.status-duplicate, .status-duplicate {
+    background: #8DB;
+}
+
+.bug-list tr.status-wontfix, .status-wontfix {
+    background: #66eeff;
+    color: #004;
+}
+
+.status1 {
+    background: gold;
+    text-decoration: line-through;
+}
+
+.status2 {
+    background: red;
+    text-decoration: line-through;
+}
+
+.status3 {
+    background: green;
+    text-decoration: line-through;
+}
+
+.error {
+    background: gold;
+}
+
+.error p {
+    font-size: 1.5em;
+    padding: 0.5em;
+}
+
+.login-header {
+    font-size: 1.1em;
+    padding-left: 1em;
+    font-family: sans-serif;
+}
+
+nav ul li a {
+    font-size: 1.2em;
+    padding: 0.3em;
+}
+
+.user {
+    background-color: #ffff8b;
+    font-weight: bold;
+}
+
+.all-projects tr td {
+    font-size: 1em;
+}
+
+th {
+    text-align: left;
+}
+
+.comment {
+    border-collapse: collapse;
+}
+
+#comment-header {
+    margin: 0.25em;
+}
+
+/*.edit {
+    background-color: aliceblue;
+}*/
+
+.edit::before {
+    font-size: 62.5%;
+    font-weight: 400;
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+    content: "✏ "
+}
+
+#description pre {
+    font-size: 1.2em;
+}
+
+a {
+    text-decoration: none;
+}
+
+.emoji {
+    font-weight: 400;
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+}
+
+@media screen and (min-width: 600px) {
+    #info-desc {
+        //	background: purple;
+        display: grid;
+        grid-template-columns: fr fr;
+    }
+
+    #info {
+        grid-column: 2;
+    }
+
+    #description {
+        grid-column: 1;
+        grid-row: 1;
+        max-width: 60vh;
+    }
+}
+
+.new-bug::before {
+    content: "🐞🐛➕"
+}
+
+.new-bug::after {
+    content: "➕🦗🦟"
+}
+
+.new-bug {
+    font-family: sans-serif;
+    font-size: 1.25em;
+}

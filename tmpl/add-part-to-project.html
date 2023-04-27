@@ -1,0 +1,22 @@
+<h1>
+Add a new part to
+<a href='/bugs/project/{{.Project.ProjectId}}'>{{.Project.Name}}</a>
+</h1>
+
+<form name='add-part-to-project' method='POST'>
+<p>
+<b>Name:</b>
+<input name='name' value='{{.PartName}}'>
+</p>
+<p>
+<b>
+Description:
+</b>
+<input name='description'>
+</p>
+<p>
+<input type='submit' value='Add this part to project'>
+</p>
+
+<input type='hidden' name='bug-id' value='{{.BugId}}'>
+</form>

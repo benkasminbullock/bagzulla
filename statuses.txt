@@ -1,0 +1,6 @@
+open
+fixed
+invalid
+duplicate
+stalled
+wontfix

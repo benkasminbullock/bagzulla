@@ -1,0 +1,20 @@
+
+<h1>
+Change estimate for <a href="/bugs/bug/{{.Bug.BugId}}">{{.Title}}</a>
+</h1>
+
+<p>
+<b>Project:</b>
+<a href='../project/{{.Project.ProjectId}}'>{{.Project.Name}}</a>
+</p>
+
+<p>
+Enter the estimated time in minutes.
+</p>
+
+<form>
+<p>
+<input name="estimate" value="{{.Bug.Estimate}}">
+<input type="submit" value="Set estimated time">
+</p>
+</form>

@@ -1,0 +1,41 @@
+<h1>
+<a  target='_blank' href='{{.DisplayDir}}{{.Project.Directory}}'>
+{{.Project.Name}}
+</a>
+</h1>
+<p>(<a  href='../edit-project-name/{{.Project.ProjectId}}'>Edit project name</a> <a href='../change-project-directory/{{.Project.ProjectId}}'>Change directory</a>)</p>
+
+{{if eq .Project.Status 0}}
+<a class='new-bug' href='../add-bug-to-project/{{.Project.ProjectId}}'>
+  Add a new bug for {{.Project.Name}}
+</a>
+{{else}}
+<div class='error'>
+<p>Cancelled project, cannot add new bugs</p>
+</div>
+{{end}}
+
+<div class='project-description'>
+<p>{{.Description}} [<a  href='../edit-project-description/{{.Project.ProjectId}}'>{{if .Description}}Edit{{else}}Add description{{end}}</a>]</p>
+</div>
+{{if ne .Project.ProjectId 13}}
+{{if .Parts}}
+<p>
+<b>Parts:</b>
+{{range $_, $part := .Parts}}
+⭐ <a  href='../part/{{$part.PartId}}'>{{$part.Name}}</a>
+{{end}}
+{{end}}
+<a  href='../add-part-to-project/{{.Project.ProjectId}}'>➕ Add a new part</a>
+</p>
+{{end}}
+<h2>Open bugs in {{.Project.Name}}</h2>
+<p>
+There are {{len .Bugs}} bugs on this page.
+</p>
+
+{{$projectid := .Project.ProjectId}}
+{{template "project-bug-list.html" .}}
+<p>
+<a  href='../project-all/{{.Project.ProjectId}}'>All bugs</a>
+</p>

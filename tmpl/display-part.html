@@ -1,0 +1,6 @@
+{{if .Bug.PartId}}
+<a href='../part/{{.Bug.PartId}}'>{{.PartName}}</a>
+(<a href='../change-bug-part/{{.Bug.BugId}}'>Change</a>)
+{{else}}
+<a href='../change-bug-part/{{.Bug.BugId}}'>Assign part</a>
+{{end}}

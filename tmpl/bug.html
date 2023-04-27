@@ -1,0 +1,208 @@
+{{$bugid:=.Bug.BugId}}
+<div class='status-{{.Status}}'>
+<h1>
+{{if .ProjectName}}
+<a href='../project/{{.Bug.ProjectId}}'>{{.ProjectName}}</a> - 
+{{end}}
+{{if .Bug.PartId}}
+<a href='../part/{{.Bug.PartId}}'>{{.PartName}}</a> - 
+{{end}}
+{{.DisplayTitle}}
+{{if .User}}
+<a class='edit' href="../edit/{{.Bug.BugId}}"></a>
+{{end}}
+</h1>
+<div id='info-desc'>
+<div id='info'>
+<table>
+<tr>
+<th>Project
+{{if .User}}
+<a class='edit' href='../change-bug-project/{{.Bug.BugId}}'></a>
+{{end}}
+</th>
+<td>
+<a href='../project/{{.Bug.ProjectId}}'>{{.ProjectName}}</a>
+</td>
+</tr>
+
+<tr>
+<th>Part</th>
+<td>
+{{template "display-part.html" .}}
+</td>
+</tr>
+
+{{if .DependsOn}}
+<tr>
+<th>Depends on</th>
+<td>
+{{- range $_, $did := .DependsOn}}
+<a
+class='status{{- $did.Status -}}'
+href='../bug/{{- $did.Id}}'>{{- $did.Id}}</a>
+<a href='../delete-dependency/?cause={{$did.Id}}&effect={{$bugid}}&bug={{$bugid}}'>X</a>
+{{- end -}}
+</tr>
+{{end}}
+{{if .Blocks}}
+<tr>
+<th>Blocks</th>
+<td>
+{{- range $_, $bid := .Blocks}}
+<a href='../bug/{{- $bid.Id}}'>{{- $bid.Id}}</a>
+<a href='../delete-dependency/?effect={{$bid.Id}}&cause={{$bugid}}&bug={{$bugid}}'>X</a>
+{{- end -}}
+</td>
+</tr>
+{{end}}
+<tr>
+<td colspan='2'>
+{{if .User}}
+<a class='edit' href='../edit-dependencies/{{.Bug.BugId}}'>Edit dependencies</a>
+{{end}}
+</td>
+</tr>
+{{if .Originals}}
+<tr>
+<th>Duplicate of</th>
+<td>
+{{- range $_, $oid := .Originals}}
+<a href='../bug/{{$oid.Id}}'>{{- $oid.Id}}</a>
+<a href='../delete-duplicate/?original={{$oid.Id}}&bug={{$bugid}}'>X</a>
+{{ end -}}
+</td>
+</tr>
+{{end}}
+{{if .Duplicates}}
+<tr>
+<th>Duplicates of this bug:</th>
+<td>
+{{- range $_, $did := .Duplicates}}
+<a href='../bug/{{$did.Id}}'>{{- $did.Id}}</a>
+<a href='../delete-duplicate/?duplicate={{$did.Id}}&bug={{$bugid}}'>X</a>
+{{- end -}}
+</td>
+</tr>
+{{end}}
+{{if .User}}
+<tr>
+<td colspan='2'>
+<a class='edit' href='../edit-duplicates/{{.Bug.BugId}}'>Edit duplicates</a>
+</td>
+</tr>
+{{end}}
+<tr>
+<th>Entered</th>
+<td>{{template "time.html" .Bug.Entered}}</td>
+</tr>
+<tr>
+<th>Changed</th>
+<td>{{template "time.html" .Bug.Changed}}</td>
+</tr>
+<tr>
+<th>Status</th>
+<td>
+{{.Status}}
+{{if .User}}
+<a class='edit' href='../change-bug-status/{{.Bug.BugId}}'>Change</a>
+{{end}}
+</td>
+</tr>
+
+<tr>
+<th>Priority</th>
+<td>
+{{.Priority}}
+{{if .User}}
+<a class='edit' href='../change-bug-priority/{{.Bug.BugId}}'>Change</a>
+{{end}}
+</td>
+</tr>
+
+<tr>
+<th>Estimate</th>
+<td>
+{{.Estimate}}
+{{if .User}}
+<a class='edit' href='../change-bug-estimate/{{.Bug.BugId}}'>Change</a>
+{{end}}
+</td>
+</tr>
+
+<tr>
+<th>
+Owner
+</th>
+<td><a href='../person/{{.Bug.Owner}}'>{{.Owner}}</a>
+</td>
+</tr>
+</table>
+</div>
+
+<div id='description'>
+<h3>Description
+{{if .User}}
+<a class='edit' href='../edit-bug-description/{{.Bug.BugId}}'></a>
+{{end}}
+</h3>
+<pre>
+{{printf "%s" .DisplayDescription}}
+</pre>
+<br>
+</div>
+</div>
+{{if .User}}
+<form action='../upload/' enctype='multipart/form-data' method='post'>
+<input type='file' name='bug-image'>
+<input type='hidden' name='bug-id' value='{{.Bug.BugId}}'>
+<input id='upload-image' type='submit' value='Upload an image'>
+</form>
+{{end}}
+{{if .Images}}
+<div id='images'>
+<h3>Images</h3>
+{{range $_, $image := .Images}}
+<div id='image'>
+<img src='../image/{{$image.File}}'>
+<br>
+<a href='../delete-image/{{$image.File}}'>Delete this image</a>
+</div>
+</div>
+{{end}}
+{{end}}
+<h2 id='comment-header'>Comments</h2>
+<div class='comment'>
+{{$main := .}}
+{{range $_, $comment := .Comments}}
+<br>
+<a href='../person/{{$comment.Comment.PersonId}}'>{{$comment.Person}}</a>
+/ {{template "time.html" $comment.Txt.Entered}}
+<pre>
+{{$comment.Txt.Content}}
+</pre>
+{{if $main.User}}
+<br>
+<a class='edit' href='../edit-comment/{{$comment.Comment.CommentId}}'>(Edit)</a>
+{{end}}
+{{end}}
+{{if .User}}
+<h3>Add a comment</h3>
+<div id='add-comment'>
+<form method='POST' name='new-comment'>
+<textarea name='comment-text' cols=80 rows=6>
+</textarea>
+<br>
+<select id='bug-status' name='bug-status'>
+{{$currentStatus := .Status}}
+{{range $_, $status := .Statuses}}
+<option value='{{$status}}'
+{{if eq $status $currentStatus}}selected{{end}}>{{$status}}</option>
+{{end}}
+</select>
+<input type='submit' value='Add comment'>
+<input type='submit' value='Add comment and close' onclick='mark_fixed ()'>
+</form>
+</div>
+{{end}}
+</div>

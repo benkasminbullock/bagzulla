@@ -1,0 +1,34 @@
+<table class='bug-list'>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Priority</th>
+<th>Part</th>
+<th>Status</th>
+</tr>
+{{range $_, $bug := .Bugs}}
+<tr class='status-{{$bug.Status}}'>
+<td>
+{{$bug.Bug.BugId}}
+</td>
+<td>
+<a href='../bug/{{$bug.Bug.BugId}}'>
+{{if $bug.Title}}
+{{$bug.Title}}
+{{else}}
+Bug {{$bug.Bug.BugId}}
+{{end}}
+</a>
+</td>
+<td>
+{{$bug.Priority}}
+</td>
+<td>
+{{template "display-part.html" $bug}}
+</td>
+<td>
+{{$bug.Status}}
+</td>
+</tr>
+{{end}}
+</table>

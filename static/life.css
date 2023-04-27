@@ -1,0 +1,13 @@
+* {
+    /* This is a bit much after a while. */
+    /* font-family: "Cooper Black" */
+    font-family: sans-serif;
+}
+
+body {
+    background: #EFFFEF;
+}
+
+.nav-options li {
+    margin: 0.2em;
+}

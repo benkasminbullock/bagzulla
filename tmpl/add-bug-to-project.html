@@ -1,0 +1,12 @@
+<h1>Add a new bug for {{.Project.Name}}</h1>
+<p>
+Insert your bug details in the form below.
+</p>
+<form name='add-bug-to-project' method='POST'>
+<table>{{template "add-bug-form.html" .}}
+<tr>
+<td>
+</td>
+<td><input type='submit' value='Add a new bug'></td>
+</tr></table>
+</form>

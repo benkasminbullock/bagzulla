@@ -1,0 +1,30 @@
+<h1>Add a new bug</h1>
+<div>
+<form name='add-bug' method='POST'>
+<table>
+<tr>
+<th>Project</th>
+<td>
+<select name='project' id='project' onchange='setProject()'>
+{{range $_, $project := .Choices}}
+<option value='{{$project.ProjectId}}'>{{$project.Name}}</option>
+{{end}}
+</select>
+</td>
+</tr>
+<tr>
+<th>Part</th>
+<td>
+<select name='part' id='part'>
+</select>
+</td>
+</tr>
+{{template "add-bug-form.html" .}}
+<tr>
+<td>
+<input type='submit' value='Add bug'>
+</td>
+</tr>
+</table>
+</form>
+</div>

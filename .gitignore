@@ -1,0 +1,13 @@
+bagzulla.db
+schema-out.go
+schema-out.txt
+bagzulla
+errorlog
+log
+*.db
+bagzulla-status.go
+bagzulla.db.backup.*
+# User-uploaded images
+bugimages/*
+# Contains the cookie database
+logins.json

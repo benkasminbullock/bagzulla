@@ -1,0 +1,30 @@
+<h1>Log in</h1>
+<table>
+<form method='POST' action='../login/'>
+<tr>
+<td class='login-header'>
+Name
+</td>
+<td>
+<input name='name'>
+</td>
+</tr>
+<tr>
+<td class='login-header'>
+Password
+</td>
+<td>
+<input type='password' name='password'>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td>
+<input type='submit' value='Log in'>
+</td>
+</tr>
+<input type='hidden' name='referer' value='{{.Referer}}'>
+</form>
+</table>
+<hr>

@@ -1,0 +1,12 @@
+<h1>Server controls</h1>
+{{if .Stopping}}
+<p class="message">
+Server is stopping.
+</p>
+{{else}}
+<form name="stop" method="GET">
+<input type="hidden" name="stop" value="1">
+<span class="emoji">🛑</span>
+<input type="submit" value="Stop server">
+</form>
+{{end}}

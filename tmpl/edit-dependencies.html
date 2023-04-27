@@ -1,0 +1,22 @@
+<p>
+Enter the bug numbers separated by spaces. Delete is not implemented
+yet, delete dependencies using the sqlite3 on the command line.
+</p>
+<form>
+<table>
+<tr>
+<th>Depends on</th>
+<td>
+<input type='text' name='depends-on' value='
+{{- range $_, $did := .DependsOn -}} {{$did.Id}} {{ end -}}'>
+<tr>
+<th>Blocks</th>
+<td>
+<input type='text' name='blocks' value='
+{{- range $_, $bid := .Blocks -}} {{$bid.Id}} {{ end -}}
+'>
+<tr>
+<td>
+<input type='submit'>
+</table>
+</form>
