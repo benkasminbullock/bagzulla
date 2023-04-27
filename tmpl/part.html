@@ -1,15 +1,15 @@
-<h1><a href='../project/{{.Project.ProjectId}}'>{{.Project.Name}}</a> part {{.Part.Name}}
+<h1><a href="../project/{{.Project.ProjectId}}">{{.Project.Name}}</a> part {{.Part.Name}}
 {{if .User}}
-<a class='edit' href='../edit-part-name/{{.Part.PartId}}'></a>
+<a class="edit" href="../edit-part-name/{{.Part.PartId}}"></a>
 {{end}}
 </h1>
-<div id='part-description'>
+<div id="part-description">
 
-<a class='new-bug' href='../add-bug-to-part/{{.Part.PartId}}'>Add a new bug for {{.Part.Name}}</a>
+<a class="new-bug" href="../add-bug-to-part/{{.Part.PartId}}">Add a new bug for {{.Part.Name}}</a>
 
 <h3>Description
 {{if .User}}
-<a class='edit' href='../edit-part-description/{{.Part.PartId}}'></a>
+<a class="edit" href="../edit-part-description/{{.Part.PartId}}"></a>
 {{end}}
 </h3>
 <p>{{.Description}}</p>
@@ -26,9 +26,9 @@ There are {{len .Bugs}} bugs on this page.
 
 <p>
 {{if .OpenOnly}}
-<a href='../part-all/{{.Part.PartId}}'>All bugs of {{.Part.Name}}, including closed</a>
+<a href="../part-all/{{.Part.PartId}}">All bugs of {{.Part.Name}}, including closed</a>
 {{else}}
-<a href='../part/{{.Part.PartId}}'>Open bugs of {{.Part.Name}}</a>
+<a href="../part/{{.Part.PartId}}">Open bugs of {{.Part.Name}}</a>
 {{end}}.
 </p>
 

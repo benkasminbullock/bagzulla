@@ -1,7 +1,7 @@
 <h1>Search bugs</h1>
 <form>
-<input type='search' name='searchterm' value="{{.SearchTerm}}">
-<input type='submit' value='Search'>
+<input type="search" name="searchterm" value="{{.SearchTerm}}">
+<input type="submit" value="Search">
 {{if .SearchTerm}}
 {{$nIds := len .Ids}}
 {{if ne $nIds 0}}
@@ -11,7 +11,7 @@
 <pre>
 {{$_.Content}}
 </pre>
-{{if ne $_.BugId 0}}<a href='../bug/{{$_.BugId}}'>Bug {{$_.BugId}}</a>{{end}}
+{{if ne $_.BugId 0}}<a href="../bug/{{$_.BugId}}">Bug {{$_.BugId}}</a>{{end}}
 </li>
 {{end}}
 </ol>

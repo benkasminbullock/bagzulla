@@ -1,12 +1,12 @@
 <h1>Person {{.Person.Name}}</h1><p><b>email:</b> {{.Person.Email}}</p><h2>List of bugs connected with {{.Person.Name}}</h2>
-<table class='bug-list'>
+<table class="bug-list">
 <tr>
 <th>Bug</th>
 </tr>
 {{range $_, $bug := .Bugs}}
 <tr>
 <td>
-<a href='/bug/{{$bug.Bug.BugId}}'>{{$bug.Title}}</a>
+<a href="/bug/{{$bug.Bug.BugId}}">{{$bug.Title}}</a>
 </td>
 </tr>
 {{end}}

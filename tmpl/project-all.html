@@ -1,8 +1,8 @@
 <h1>All bugs for project {{.Project.Name}}</h1>
-<div class='project-description'>
+<div class="project-description">
 <h3>Description</h3>
 <p>{{.Description}}</p>
-(<a href='../edit-project-description/{{.Project.ProjectId}}'>Edit</a>)
+(<a href="../edit-project-description/{{.Project.ProjectId}}">Edit</a>)
 </div>
 {{template "project-info.html" .Project}}
 <h2>Parts</h2>
@@ -11,20 +11,20 @@
 {{range $_, $part := .Parts}}
 <tr>
 <td>
-<a href='../part/{{$part.PartId}}'>{{$part.Name}}</a>
+<a href="../part/{{$part.PartId}}">{{$part.Name}}</a>
 </td>
 </tr>
 {{end}}
 </tbody>
 </table>
 <ul>
-<li><a href='../add-part-to-project/{{.Project.ProjectId}}'>Add a new part for {{.Project.Name}}</a></li>
+<li><a href="../add-part-to-project/{{.Project.ProjectId}}">Add a new part for {{.Project.Name}}</a></li>
 </ul>
 <h2>All bugs in {{.Project.Name}}</h2>
 {{$projectid := .Project.ProjectId}}
 {{template "project-bug-list.html" .}}
 <ul>
 <li>
-<a href='../add-bug-to-project/{{.Project.ProjectId}}'>Add a new bug for {{.Project.Name}}</a>
+<a href="../add-bug-to-project/{{.Project.ProjectId}}">Add a new bug for {{.Project.Name}}</a>
 </li>
 </ul>

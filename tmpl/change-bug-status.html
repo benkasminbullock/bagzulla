@@ -1,12 +1,12 @@
 
-<h1>Change the status of <a href='/bug/{{.Bug.Bug.BugId}}'>{{.Bug.Title}}</a></h1>
+<h1>Change the status of <a href="/bug/{{.Bug.Bug.BugId}}">{{.Bug.Title}}</a></h1>
 <form>
-<select name='status'>
+<select name="status">
 {{$currentStatus := .Bug.Status}}
 {{range $_, $status := .Statuses}}
-<option value='{{$status}}'
+<option value="{{$status}}"
 {{if eq $status $currentStatus}}selected{{end}}>{{$status}}</value>
 {{end}}
 </select>
-<input type='submit' value='Change bug's status'>
+<input type="submit" value="Change bug's status">
 </form>

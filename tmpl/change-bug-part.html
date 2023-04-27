@@ -5,7 +5,7 @@ Assign a part to <a href="/bugs/bug/{{.Bug.BugId}}">{{.Title}}</a>
 
 <p>
 <b>Project:</b>
-<a href='../project/{{.Project.ProjectId}}'>{{.Project.Name}}</a>
+<a href="../project/{{.Project.ProjectId}}">{{.Project.Name}}</a>
 </p>
 
 <form>
@@ -13,10 +13,10 @@ Assign a part to <a href="/bugs/bug/{{.Bug.BugId}}">{{.Title}}</a>
 {{if .ProjectParts}}
 {{$currentPartId := .Bug.PartId}}
 <b>Select an existing part:</b>
-<select name='part'>
-<option value='None'>None</option>
+<select name="part">
+<option value="None">None</option>
 {{range $_, $part := .ProjectParts}}
-<option value='{{$part.Name}}'
+<option value="{{$part.Name}}"
 {{if eq $part.PartId $currentPartId}}selected{{end}}>{{$part.Name}}</option>
 {{end}}
 </select>
@@ -25,11 +25,11 @@ Assign a part to <a href="/bugs/bug/{{.Bug.BugId}}">{{.Title}}</a>
 <hr>
 <p>
 <b>Add new part:</b> 
-<input name='new-part'>
+<input name="new-part">
 </p>
 <p>
-<input type='submit' value='Assign the above part to {{.Title}}'>
-<input type='hidden' value='{{.Bug.ProjectId}}' name='projectid'>
-<input type='hidden' value='{{.Bug.BugId}}' name='bugid'>
+<input type="submit" value="Assign the above part to {{.Title}}">
+<input type="hidden" value="{{.Bug.ProjectId}}" name="projectid">
+<input type="hidden" value="{{.Bug.BugId}}" name="bugid">
 </p>
 </form>

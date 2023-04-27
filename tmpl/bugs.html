@@ -4,22 +4,22 @@
 There are {{len .Bugs}} bugs on this page.
 </p>
 
-<table class='bug-list' border>
+<table class="bug-list" border>
 <tr>
-<th><a href='id'>ID</a></th>
+<th><a href="id">ID</a></th>
 <th>Bug title</th>
 <th>Status</th>
-<th><a href='priority'>Priority</a></th>
+<th><a href="priority">Priority</a></th>
 <th>Project</th>
 <th>Part</th>
 </tr>
 {{range $_, $bug := .Bugs}}
-<tr class='status-{{$bug.Status}}'>
+<tr class="status-{{$bug.Status}}">
 <td>
-<a target='_blank' href='../bug/{{$bug.Bug.BugId}}'>{{$bug.Bug.BugId}}</a>
+<a target="_blank" href="../bug/{{$bug.Bug.BugId}}">{{$bug.Bug.BugId}}</a>
 </td>
 <td>
-<a target='_blank' href='../bug/{{$bug.Bug.BugId}}'>{{$bug.DisplayTitle}}</a>
+<a target="_blank" href="../bug/{{$bug.Bug.BugId}}">{{$bug.DisplayTitle}}</a>
 </td>
 <td>
 {{$bug.Status}}
@@ -28,7 +28,7 @@ There are {{len .Bugs}} bugs on this page.
 {{$bug.Priority}}
 </td>
 <td>
-<a href='../project/{{$bug.Bug.ProjectId}}'>{{$bug.ProjectName}}</a>
+<a href="../project/{{$bug.Bug.ProjectId}}">{{$bug.ProjectName}}</a>
 </td>
 <td>
 {{template "display-part.html" $bug}}

@@ -1,8 +1,8 @@
 <h1>All projects</h1>
 <p>
-<a href='../add-project/'>Add a project</a>
+<a href="../add-project/">Add a project</a>
 </p>
-<table class='all-projects'>
+<table class="all-projects">
 <tr>
 <th>Name
 <th>Directory
@@ -14,25 +14,25 @@
 {{range $index, $project := .Projects}}
 <tr>
 <td>
-<a href='../project/{{.ProjectId}}'>{{.Name}}</a>
+<a href="../project/{{.ProjectId}}">{{.Name}}</a>
 </td>
 <td>
 {{if .Directory}}
 {{if $DisplayDir}}
-<a href='{{$DisplayDir}}{{.Directory}}'>{{$project.Directory}}</a>
+<a href="{{$DisplayDir}}{{.Directory}}">{{$project.Directory}}</a>
 {{else}}
 {{$project.Directory}}
 {{end}}
 {{else}}
 {{if ne .ProjectId $ProjectNone}}
-<a href='../change-project-directory/{{.ProjectId}}'>Set directory</a></td>
+<a href="../change-project-directory/{{.ProjectId}}">Set directory</a></td>
 {{end}}
 {{end}}
 </td>
 <td>
-<a href='../add-bug-to-project/{{.ProjectId}}'>New bug</a>
+<a href="../add-bug-to-project/{{.ProjectId}}">New bug</a>
 </td>
-<td class='open-bugs'>
+<td class="open-bugs">
 {{GetArray $OpenBugs .ProjectId}}
 </td>
 </tr>

@@ -1,4 +1,4 @@
-<table class='bug-list'>
+<table class="bug-list">
 <tr>
 <th>ID</th>
 <th>Title</th>
@@ -6,12 +6,12 @@
 <th>Priority</th>
 </tr>
 {{range $_, $bug := .Bugs}}
-<tr class='status-{{$bug.Status}}'>
+<tr class="status-{{$bug.Status}}">
 <td>
 {{$bug.Bug.BugId}}
 </td>
 <td>
-<a href='../bug/{{$bug.Bug.BugId}}'>
+<a href="../bug/{{$bug.Bug.BugId}}">
 {{if $bug.Title}}
 {{$bug.Title}}
 {{else}}

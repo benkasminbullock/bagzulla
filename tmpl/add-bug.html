@@ -1,13 +1,13 @@
 <h1>Add a new bug</h1>
 <div>
-<form name='add-bug' method='POST'>
+<form name="add-bug" method="POST">
 <table>
 <tr>
 <th>Project</th>
 <td>
-<select name='project' id='project' onchange='setProject()'>
+<select name="project" id="project" onchange="setProject()">
 {{range $_, $project := .Choices}}
-<option value='{{$project.ProjectId}}'>{{$project.Name}}</option>
+<option value="{{$project.ProjectId}}">{{$project.Name}}</option>
 {{end}}
 </select>
 </td>
@@ -15,14 +15,14 @@
 <tr>
 <th>Part</th>
 <td>
-<select name='part' id='part'>
+<select name="part" id="part">
 </select>
 </td>
 </tr>
 {{template "add-bug-form.html" .}}
 <tr>
 <td>
-<input type='submit' value='Add bug'>
+<input type="submit" value="Add bug">
 </td>
 </tr>
 </table>

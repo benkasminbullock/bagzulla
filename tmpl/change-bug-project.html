@@ -3,15 +3,15 @@
 <p>
 {{if .Projects}}
 {{$currentProjectId := .Bug.ProjectId}}
-<select name='project'>
+<select name="project">
 {{range $_, $project := .Projects}}
-<option value='{{$project.Name}}'
+<option value="{{$project.Name}}"
 {{if eq $project.ProjectId $currentProjectId}}selected{{end}}>{{$project.Name}}</option>
 {{end}}
 </select>
 {{else}}
-<input name='project'>
+<input name="project">
 {{end}}
-<input type='submit' value='Assign the above project to {{.Title}}'>
-<input type='hidden' value='{{.Bug.BugId}}' name='bugid'>
+<input type="submit" value="Assign the above project to {{.Title}}">
+<input type="hidden" value="{{.Bug.BugId}}" name="bugid">
 </form>

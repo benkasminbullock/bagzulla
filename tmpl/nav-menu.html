@@ -1,51 +1,51 @@
 <nav>
-<div class='nav-menu'>
-<ul class='nav-options'>
+<div class="nav-menu">
+<ul class="nav-options">
 <!-- order from most common operation to least common. -->
 <li>
-<a  href='../open-bugs/'>Open bugs</a>
+<a  href="../open-bugs/">Open bugs</a>
 </li>
 <li>
-<a  href='../bugs/'>All bugs</a>
+<a  href="../bugs/">All bugs</a>
 </li>
 <li>
-<a  href='../projects/'>Projects</a>
+<a  href="../projects/">Projects</a>
 </li>
 {{if .User}}
 <li>
-<a  href='../add-bug/'>New bug</a>
+<a  href="../add-bug/">New bug</a>
 </li>
 {{end}}
 <li>
-<a  href='../random-open/'>Random open bug</a>
+<a  href="../random-open/">Random open bug</a>
 </li>
 <li>
-<a  href='../search/'>Search</a>
+<a  href="../search/">Search</a>
 </li>
 <li>
-<a  href='../recent/'>
+<a  href="../recent/">
 Recent changes
 </a>
 </li>
 {{if .User}}
-<li class='user'>
-<a  href='../person/{{.User.PersonId}}'>{{.User.Name}}</a>
+<li class="user">
+<a  href="../person/{{.User.PersonId}}">{{.User.Name}}</a>
 </li>
 <li>
-<a  href='../logout/'>Log out</a>
+<a  href="../logout/">Log out</a>
 </li>
 {{else}}
 <li>
-<a  href='../login/'>Log in</a>
+<a  href="../login/">Log in</a>
 </li>
 {{end}}
 {{if .User}}
 <li>
-<a href='../controls/'><span class="emoji">⚠</span> Controls</a>
+<a href="../controls/"><span class="emoji">⚠</span> Controls</a>
 </li>
 {{end}}
-</ul> <!-- class='nav-options -->
-</div> <!-- class='nav-menu' -->
+</ul> <!-- class="nav-options -->
+</div> <!-- class="nav-menu" -->
 </nav>
-<div class='nav-menu'></div>
+<div class="nav-menu"></div>
 

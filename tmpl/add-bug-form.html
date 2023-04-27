@@ -1,16 +1,16 @@
 <tr>
 <th>Title</th>
-<td><input name='title' size='80' {{if .Title}}value='{{.Title}}'{{end}}></td>
+<td><input name="title" size="80" {{if .Title}}value="{{.Title}}"{{end}}></td>
 </tr>
 
 <tr>
 <th>Description</th>
 <td>
-<textarea name='description' cols=80 rows=10>
+<textarea name="description" cols=80 rows=10>
 {{- if .Description}}
 {{.Description}}
 {{end -}}
 </textarea>
 </td>
 </tr>
-<input name='auto' type='hidden' id='auto' value='auto'>
+<input name="auto" type="hidden" id="auto" value="auto">
