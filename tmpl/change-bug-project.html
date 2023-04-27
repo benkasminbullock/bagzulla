@@ -4,7 +4,6 @@
 {{if .Projects}}
 {{$currentProjectId := .Bug.ProjectId}}
 <select name='project'>
-<option value='None'>None</option>
 {{range $_, $project := .Projects}}
 <option value='{{$project.Name}}'
 {{if eq $project.ProjectId $currentProjectId}}selected{{end}}>{{$project.Name}}</option>
