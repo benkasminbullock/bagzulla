@@ -1,7 +1,11 @@
 <h1>
-<a  target='_blank' href='{{.DisplayDir}}{{.Project.Directory}}'>
+{{if .DisplayDir}}
+<a target="_blank" href="{{.DisplayDir}}{{.Project.Directory}}">
 {{.Project.Name}}
 </a>
+{{else}}
+{{.Project.Name}}
+{{end}}
 </h1>
 <p>(<a  href='../edit-project-name/{{.Project.ProjectId}}'>Edit project name</a> <a href='../change-project-directory/{{.Project.ProjectId}}'>Change directory</a>)</p>
 

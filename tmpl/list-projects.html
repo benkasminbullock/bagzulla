@@ -18,7 +18,11 @@
 </td>
 <td>
 {{if .Directory}}
+{{if $DisplayDir}}
 <a href='{{$DisplayDir}}{{.Directory}}'>{{$project.Directory}}</a>
+{{else}}
+{{$project.Directory}}
+{{end}}
 {{else}}
 {{if ne .ProjectId $ProjectNone}}
 <a href='../change-project-directory/{{.ProjectId}}'>Set directory</a></td>

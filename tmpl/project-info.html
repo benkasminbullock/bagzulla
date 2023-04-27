@@ -1,11 +1,17 @@
-<div class='proj-info'>
+<div class="proj-info">
 <h2>Project information</h2>
 <table>
 <tr>
 <th>Directory</th>
-<td><a href='{{.DisplayDir}}{{.Directory}}'>{{.Directory}}</a></td>
 <td>
-<a href='../change-project-directory/{{.ProjectId}}'>Change directory</a></td>
+{{if .DisplayDir}}
+<a href="{{.DisplayDir}}{{.Directory}}">{{.Directory}}</a>
+{{else}}
+{{.Directory}}
+{{end}}
+</td>
+<td>
+<a href="../change-project-directory/{{.ProjectId}}">Change directory</a></td>
 </tr>
 </table>
 </div>
