@@ -33,10 +33,14 @@ If you're using a proxy, you can run it something like this:
 
 There is an example script in `run.sh` in the top directory.
 
+If you want to make the directories work, you can specify a directory
+display URL using the command-line option --display. See run.sh for an
+example of how this works for me locally.
+
 # STOPPING THE SERVER
 
-At the moment there is no control for stopping the server, so you'll
-need to kill the process.
+The server can be stopped from the interface using the control at the
+top, or by a command of the form http://localhost/bagzulla?stop=1.
 
 # COPYRIGHT AND LICENCE
 
