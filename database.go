@@ -492,35 +492,33 @@ func removeDependencyCause(db *sql.DB, cause int64, effect int64) (err error) {
 // The sessions are not stored in the database but in a file called
 // "logins.json". This should be updated when they are stored there.
 
-/*
 var searchCookieSQL = "SELECT person_id FROM session WHERE cookie=?"
 var searchCookieStmt *sql.Stmt
 
-func SearchCookie(b Bagapp, cookie text) (found bool, person_id int) {
+func SearchCookie(b *Bagapp, cookie string) (personId int64, found bool, err error) {
 	if searchCookieStmt == nil {
-		searchCookieStmt, ok := PrepareSql(b, searchCookieSQL)
-		if !ok {
-			return false, person_id
+		var err error
+		searchCookieStmt, err = b.db.Prepare(searchCookieSQL)
+		if err != nil {
+			return 0, false, err
 		}
 	}
 	rows, err := searchCookieStmt.Query(cookie)
 	defer rows.Close()
 	if err != nil {
-		b.errorPage("Error looking for cookie '%s': %s", cookie, err.Error())
-		return false, person_id
+		return 0, false, err
 	}
 	for rows.Next() {
-		err := rows.Scan(&person_id)
+		err := rows.Scan(&personId)
 		if err != nil {
-			b.errorPage("Error scanning for person ID: %s", err.Error())
+			return 0, false, err
 		}
-		if person_id != 0 {
-			return true, person_id
+		if personId != 0 {
+			return personId, true, nil
 		}
 	}
-	return false, person_id
+	return 0, false, nil
 }
-*/
 
 var txtDeleteSQL = `
 UPDATE txt

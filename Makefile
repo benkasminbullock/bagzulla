@@ -5,6 +5,7 @@ bagzulla-status.go \
 bagzulla.go \
 database.go \
 fixstring.go \
+user.go \
 
 
 GOL=/home/ben/projects/gologin

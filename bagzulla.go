@@ -66,7 +66,7 @@ func (w gzipResponseWriter) Write(b []byte) (int, error) {
 
 // Holder for application information.
 type Bagapp struct {
-	store store.Store
+	store login.LoginStore
 	login login.Login
 	// The connection to the database.
 	db *sql.DB
@@ -2794,12 +2794,21 @@ func (b *Bagapp) Init() {
 	}
 	b.TopURL = *url
 	b.DisplayDir = *display
-	b.store = store.Store{}
-	if debugLogin {
-		b.store.Verbose = true
+	loginFile := false
+	if loginFile {
+		s := store.Store{}
+		s.Init(topDir)
+		if debugLogin {
+			s.Verbose = true
+		}
+		b.store = &s
+	} else {
+		bu := baguser{
+			b: b,
+		}
+		b.store = &bu
 	}
-	b.store.Init(topDir)
-	b.login.Init(&b.store, cookieName, cookiePath)
+	b.login.Init(b.store, cookieName, cookiePath)
 	if debugLogin {
 		b.login.Verbose = true
 	}

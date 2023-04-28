@@ -7,13 +7,16 @@ part_id INTEGER NOT NULL,
 entered TIMESTAMP,
 owner INTEGER NOT NULL,
 status INTEGER,
-priority INTEGER, changed timestamp, estimate INTEGER,
+priority INTEGER,
+changed timestamp,
+estimate INTEGER,
 FOREIGN KEY(title) REFERENCES txt(txt_id),
 FOREIGN KEY(description) REFERENCES txt(txt_id),
 FOREIGN KEY(project_id) REFERENCES project(project_id),
 FOREIGN KEY(part_id) REFERENCES part(part_id),
 FOREIGN KEY(owner) REFERENCES person(person_id)
 );
+
 CREATE TABLE project(
 project_id INTEGER PRIMARY KEY,
 name TEXT UNIQUE NOT NULL,
@@ -23,6 +26,7 @@ owner INTEGER NOT NULL, status,
 FOREIGN KEY(description) REFERENCES txt(txt_id),
 FOREIGN KEY(owner) REFERENCES person(person_id)
 );
+
 CREATE TABLE part(
 part_id INTEGER PRIMARY KEY,
 name TEXT,
@@ -31,12 +35,14 @@ project_id INTEGER NOT NULL,
 FOREIGN KEY(description) REFERENCES txt(txt_id),
 FOREIGN KEY(project_id) REFERENCES project(project_id)
 );
+
 CREATE TABLE gitcommit(
 gitcommit_id INTEGER PRIMARY KEY,
 githash TEXT,
 project_id INTEGER NOT NULL,
 FOREIGN KEY(project_id) REFERENCES project(project_id)
 );
+
 CREATE TABLE comment(
 comment_id INTEGER PRIMARY KEY,
 txt_id INTEGER NOT NULL,
@@ -46,12 +52,14 @@ FOREIGN KEY(txt_id) REFERENCES txt(txt_id),
 FOREIGN KEY(bug_id) REFERENCES bug(bug_id),
 FOREIGN KEY(person_id) REFERENCES person(person_id)
 );
+
 CREATE TABLE person(
 person_id INTEGER PRIMARY KEY,
 name TEXT UNIQUE NOT NULL,
 email TEXT UNIQUE NOT NULL,
 password TEXT
 );
+
 CREATE TABLE dependency(
 dependency_id INTEGER PRIMARY KEY,
 cause INTEGER NOT NULL,
@@ -59,6 +67,7 @@ effect INTEGER NOT NULL,
 FOREIGN KEY(cause) REFERENCES bug(bug_id),
 FOREIGN KEY(effect) REFERENCES bug(bug_id)
 );
+
 CREATE TABLE duplicate(
 duplicate_id INTEGER PRIMARY KEY,
 original INTEGER NOT NULL,
@@ -66,19 +75,32 @@ duplicate INTEGER NOT NULL,
 FOREIGN KEY(original) REFERENCES bug(bug_id),
 FOREIGN KEY(duplicate) REFERENCES bug(bug_id)
 );
+
 CREATE TABLE image(
-image_id INTEGER PRIMARY KEY,
-file TEXT UNIQUE NOT NULL,
-bug_id INTEGER NOT NULL,
-person_id INTEGER NOT NULL,
-FOREIGN KEY(bug_id) REFERENCES bug(bug_id),
-FOREIGN KEY(person_id) REFERENCES person(person_id)
+	image_id INTEGER PRIMARY KEY,
+	file TEXT UNIQUE NOT NULL,
+	bug_id INTEGER NOT NULL,
+	person_id INTEGER NOT NULL,
+	FOREIGN KEY(bug_id) REFERENCES bug(bug_id),
+	FOREIGN KEY(person_id) REFERENCES person(person_id)
 );
-CREATE TABLE session(session_id INTEGER PRIMARY KEY, person_id INTEGER NOT NULL, cookie TEXT NOT NULL, FOREIGN KEY(person_id) REFERENCES person(person_id));
-CREATE TABLE IF NOT EXISTS "txt" (
-txt_id INTEGER PRIMARY KEY,
-entered TIMESTAMP,
-content TEXT,
-txttype TEXT,
-other_id INTEGER
+
+CREATE TABLE session(
+	session_id INTEGER PRIMARY KEY,
+	person_id INTEGER NOT NULL,
+	cookie TEXT NOT NULL,
+	start TIMESTAMP,
+	FOREIGN KEY(person_id) REFERENCES person(person_id)
 );
+
+CREATE TABLE "txt" (
+	txt_id INTEGER PRIMARY KEY,
+	entered TIMESTAMP,
+	content TEXT,
+	txttype TEXT,
+	other_id INTEGER
+);
+
+-- Local variables:
+-- mode: sql
+-- End:

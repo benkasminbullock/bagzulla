@@ -6,10 +6,14 @@ use FindBin '$Bin';
 use JSON::Parse 'read_json';
 use DBI;
 
+my $file = 'bagzulla.db';
+
 chdir "$Bin/.." or die $!;
-unlink 'bagzulla.db' or die $!;
-system ("sqlite3 -batch bagzulla.db < schema.txt");
-my $db = DBI->connect('dbi:SQLite:dbname=bagzulla.db','','',
+if (-f $file) {
+    rename $file, "$file.backup" or die $!;
+}
+system ("sqlite3 -batch $file < schema.txt");
+my $db = DBI->connect("dbi:SQLite:dbname=$file",'','',
 		      {RaiseError => 1, AutoCommit => 1});
 my $users = read_json ("users.json");
 for my $user (@$users) {
