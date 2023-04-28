@@ -24,7 +24,7 @@ to create and populate a database using the schema with
 
     scripts/init.pl
 
-This requires you to have Perl and the modules `DBD`, `DBD::sqlite`,
+This requires you to have Perl and the modules `DBI`, `DBD::sqlite`,
 and `JSON::Parse`. It deletes any old database file called
 `bagzulla.db`, then it creates the database file again from the schema
 in `schema.txt` by copying some users from `users.json` in the top
