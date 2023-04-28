@@ -489,6 +489,9 @@ func removeDependencyCause(db *sql.DB, cause int64, effect int64) (err error) {
 	return err
 }
 
+// The sessions are not stored in the database but in a file called
+// "logins.json". This should be updated when they are stored there.
+
 /*
 var searchCookieSQL = "SELECT person_id FROM session WHERE cookie=?"
 var searchCookieStmt *sql.Stmt
