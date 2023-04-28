@@ -1,10 +1,14 @@
+// Store the user/cookie/session in the database.
+
 package main
 
 import (
 	"bagzulla/bagzullaDb"
 	"database/sql"
+	"fmt"
 )
 
+// This implements the interface of login.LoginStore.
 type baguser struct {
 	b *Bagapp
 }
@@ -23,8 +27,21 @@ func (bu *baguser) CheckPassword(user string, password string) (found bool) {
 	return false
 }
 
+var deleteCookieSQL = `DELETE FROM session WHERE cookie=?`
+var deleteCookieStmt *sql.Stmt
+
 func (bu *baguser) DeleteCookie(cookie string) (err error) {
-	return nil
+	if len(cookie) == 0 {
+		return fmt.Errorf("Empty cookie")
+	}
+	if deleteCookieStmt == nil {
+		deleteCookieStmt, err = bu.b.db.Prepare(deleteCookieSQL)
+		if err != nil {
+			return err
+		}
+	}
+	_, err = deleteCookieStmt.Exec(cookie)
+	return err
 }
 
 func (bu *baguser) FindUser(user string) (found bool) {

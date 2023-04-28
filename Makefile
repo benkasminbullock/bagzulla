@@ -26,4 +26,5 @@ test:
 
 clean:
 	rm -f example simple foo.db bagzulla bagzulla-db bagzullaDbtest
+	purge -r
 
