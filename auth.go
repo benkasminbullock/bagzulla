@@ -9,17 +9,16 @@ import (
 )
 
 // The name of the cookie which is used to authenticate the user.
-
 var cookieName = "session"
 var cookiePath = "/"
 
 // Print an error page in case of authentication failure.
-
 func (b *Bagreply) authError(format string, a ...interface{}) {
 	format = "<b>Authentication error:</b> " + format
 	b.errorPage(format, a...)
 }
 
+// Get the session
 func (b *Bagreply) getSession() (user bagzullaDb.Person, found bool, ok bool) {
 	login, err := b.App.login.User(b.w, b.r)
 	if err != nil {
@@ -31,8 +30,8 @@ func (b *Bagreply) getSession() (user bagzullaDb.Person, found bool, ok bool) {
 		b.errorPage("Error getting user details for name '%s': %s", login, err)
 		return user, false, false
 	}
-	/* For some reason bagzullaDb.go doesn't fill in the Name field of
-	   the Person structure. */
+	// For some reason bagzullaDb.go doesn't fill in the Name field of
+	// the Person structure.
 	user.Name = login
 	return user, true, true
 }
@@ -41,6 +40,8 @@ type loginform struct {
 	Referer string
 }
 
+// Indicate that the requested action is not possible due to not being
+// logged in.
 func (b *Bagreply) ErrorLogin() {
 	if !b.runATemplate("top.html", b) {
 		return
@@ -67,12 +68,12 @@ func (b *Bagreply) ErrorLogin() {
 	}
 }
 
-/* This is called from the form page /login/. */
+// This is called from the form page /login/.
 func loginHandler(b *Bagreply) {
 	name := b.r.FormValue("name")
 	if len(name) == 0 {
-		/* Show the login form with a hidden value containing the
-		   referring page. */
+		// Show the login form with a hidden value containing the
+		// referring page.
 		var lf loginform
 		lf.Referer = b.r.Referer()
 		b.runTemplate("login.html", lf)
@@ -95,14 +96,13 @@ func loginHandler(b *Bagreply) {
 	if debugLogin {
 		log.Printf("Logged in.\n")
 	}
-	/* Go back to the page where the login says it was referred from. */
+	// Go back to the page where the login says it was referred from.
 	referer := b.r.FormValue("referer")
 	http.Redirect(b.w, b.r, referer, http.StatusFound)
 }
 
-/* This is called directly by /logout/, so it is not from a form, so
-   just get the referrer from b.r. */
-
+// This is called directly by /logout/, so it is not from a form, so
+// just get the referrer from b.r.
 func logoutHandler(b *Bagreply) {
 	b.App.login.LogOut(b.w, b.r)
 	referer := b.r.Referer()

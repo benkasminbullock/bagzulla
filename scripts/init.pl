@@ -21,7 +21,7 @@ for my $user (@$users) {
     my $n = $user->{login};
     $db->do ("INSERT INTO person(name,email,password) VALUES('$n','$n\@localhost','$p')");
 }
-$db->do ("INSERT INTO txt(content) VALUES('Project unspecified')");
+$db->do ("INSERT INTO txt(content,entered) VALUES('Project unspecified',CURRENT_TIMESTAMP)");
 $db->do ("INSERT INTO project(name,directory,description,owner,status) VALUES('None','',1,1,0)");
 $db->disconnect ();
 exit;

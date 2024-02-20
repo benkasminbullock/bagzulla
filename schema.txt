@@ -1,79 +1,79 @@
 CREATE TABLE bug(
-bug_id INTEGER PRIMARY KEY,
-title INTEGER NOT NULL,
-description INTEGER NOT NULL,
-project_id INTEGER NOT NULL,
-part_id INTEGER NOT NULL,
-entered TIMESTAMP,
-owner INTEGER NOT NULL,
-status INTEGER,
-priority INTEGER,
-changed timestamp,
-estimate INTEGER,
-FOREIGN KEY(title) REFERENCES txt(txt_id),
-FOREIGN KEY(description) REFERENCES txt(txt_id),
-FOREIGN KEY(project_id) REFERENCES project(project_id),
-FOREIGN KEY(part_id) REFERENCES part(part_id),
-FOREIGN KEY(owner) REFERENCES person(person_id)
+	bug_id INTEGER PRIMARY KEY,
+	title INTEGER NOT NULL,
+	description INTEGER NOT NULL,
+	project_id INTEGER NOT NULL,
+	part_id INTEGER NOT NULL,
+	entered TIMESTAMP,
+	owner INTEGER NOT NULL,
+	status INTEGER,
+	priority INTEGER,
+	changed timestamp,
+	estimate INTEGER,
+	FOREIGN KEY(title) REFERENCES txt(txt_id),
+	FOREIGN KEY(description) REFERENCES txt(txt_id),
+	FOREIGN KEY(project_id) REFERENCES project(project_id),
+	FOREIGN KEY(part_id) REFERENCES part(part_id),
+	FOREIGN KEY(owner) REFERENCES person(person_id)
 );
 
 CREATE TABLE project(
-project_id INTEGER PRIMARY KEY,
-name TEXT UNIQUE NOT NULL,
-directory TEXT,
-description INTEGER NOT NULL,
-owner INTEGER NOT NULL, status,
-FOREIGN KEY(description) REFERENCES txt(txt_id),
-FOREIGN KEY(owner) REFERENCES person(person_id)
+       project_id INTEGER PRIMARY KEY,
+	name TEXT UNIQUE NOT NULL,
+	directory TEXT,
+	description INTEGER NOT NULL,
+	owner INTEGER NOT NULL, status,
+	FOREIGN KEY(description) REFERENCES txt(txt_id),
+	FOREIGN KEY(owner) REFERENCES person(person_id)
 );
 
 CREATE TABLE part(
-part_id INTEGER PRIMARY KEY,
-name TEXT,
-description INTEGER NOT NULL,
-project_id INTEGER NOT NULL,
-FOREIGN KEY(description) REFERENCES txt(txt_id),
-FOREIGN KEY(project_id) REFERENCES project(project_id)
+	part_id INTEGER PRIMARY KEY,
+	name TEXT,
+	description INTEGER NOT NULL,
+	project_id INTEGER NOT NULL,
+	FOREIGN KEY(description) REFERENCES txt(txt_id),
+	FOREIGN KEY(project_id) REFERENCES project(project_id)
 );
 
 CREATE TABLE gitcommit(
-gitcommit_id INTEGER PRIMARY KEY,
-githash TEXT,
-project_id INTEGER NOT NULL,
-FOREIGN KEY(project_id) REFERENCES project(project_id)
+	gitcommit_id INTEGER PRIMARY KEY,
+	githash TEXT,
+	project_id INTEGER NOT NULL,
+	FOREIGN KEY(project_id) REFERENCES project(project_id)
 );
 
 CREATE TABLE comment(
-comment_id INTEGER PRIMARY KEY,
-txt_id INTEGER NOT NULL,
-bug_id INTEGER NOT NULL,
-person_id INTEGER NOT NULL,
-FOREIGN KEY(txt_id) REFERENCES txt(txt_id),
-FOREIGN KEY(bug_id) REFERENCES bug(bug_id),
-FOREIGN KEY(person_id) REFERENCES person(person_id)
+	comment_id INTEGER PRIMARY KEY,
+	txt_id INTEGER NOT NULL,
+	bug_id INTEGER NOT NULL,
+	person_id INTEGER NOT NULL,
+	FOREIGN KEY(txt_id) REFERENCES txt(txt_id),
+	FOREIGN KEY(bug_id) REFERENCES bug(bug_id),
+	FOREIGN KEY(person_id) REFERENCES person(person_id)
 );
 
 CREATE TABLE person(
-person_id INTEGER PRIMARY KEY,
-name TEXT UNIQUE NOT NULL,
-email TEXT UNIQUE NOT NULL,
-password TEXT
+	person_id INTEGER PRIMARY KEY,
+	name TEXT UNIQUE NOT NULL,
+	email TEXT UNIQUE NOT NULL,
+	password TEXT
 );
 
 CREATE TABLE dependency(
 dependency_id INTEGER PRIMARY KEY,
-cause INTEGER NOT NULL,
-effect INTEGER NOT NULL,
-FOREIGN KEY(cause) REFERENCES bug(bug_id),
-FOREIGN KEY(effect) REFERENCES bug(bug_id)
+	cause INTEGER NOT NULL,
+	effect INTEGER NOT NULL,
+	FOREIGN KEY(cause) REFERENCES bug(bug_id),
+	FOREIGN KEY(effect) REFERENCES bug(bug_id)
 );
 
 CREATE TABLE duplicate(
-duplicate_id INTEGER PRIMARY KEY,
-original INTEGER NOT NULL,
-duplicate INTEGER NOT NULL,
-FOREIGN KEY(original) REFERENCES bug(bug_id),
-FOREIGN KEY(duplicate) REFERENCES bug(bug_id)
+	duplicate_id INTEGER PRIMARY KEY,
+	original INTEGER NOT NULL,
+	duplicate INTEGER NOT NULL,
+	FOREIGN KEY(original) REFERENCES bug(bug_id),
+	FOREIGN KEY(duplicate) REFERENCES bug(bug_id)
 );
 
 CREATE TABLE image(

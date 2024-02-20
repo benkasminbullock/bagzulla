@@ -8,10 +8,10 @@ import (
 )
 
 type fixstring struct {
-	/* The string to fix. */
+	// The string to fix.
 	s string
-	/* If this is true then don't change the string any further, jump
-	   over it. */
+	// If this is true then don't change the string any further, jump
+	// over it.
 	changed bool
 }
 
@@ -41,12 +41,10 @@ func urlToLink(from []byte) []byte {
 }
 
 // Regular expression to match
-
 var bugRegex = "[bB]ug\\s+([0-9]+)"
 var bugReplace = regexp.MustCompile(bugRegex)
 
 // Replacement text
-
 var urlFmt = "<a target='_blank' href='%s/bug/%s'>%s</a>"
 
 // Replace instances of "bug n" with a link.

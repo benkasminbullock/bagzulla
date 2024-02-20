@@ -17,7 +17,6 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"errors"
 	"flag"
 	"fmt"
 	"html"
@@ -103,17 +102,17 @@ func stringToStatus(statusString string) (int64, error) {
 			return int64(i), nil
 		}
 	}
-	return -1, errors.New(fmt.Sprintf("Unknown status %s", statusString))
+	return -1, fmt.Errorf("Unknown status %s", statusString)
 }
 
-// Convert a string like "open" to a priority number.
+// Convert a string like "high" to a priority number.
 func stringToPriority(priorityString string) (int64, error) {
 	for i, s := range priorities {
 		if priorityString == s {
 			return int64(i), nil
 		}
 	}
-	return -1, errors.New(fmt.Sprintf("Unknown priority %s", priorityString))
+	return -1, fmt.Errorf("Unknown priority %s", priorityString)
 }
 
 // Get an array value. This is used by the template construction.
@@ -128,8 +127,8 @@ type ListComment struct {
 	Person  string
 }
 
-/* This type contains information about related bugs, such as the bug
-   which this bug depends on, or the bug which this blocks. */
+// This type contains information about related bugs, such as the bug
+// which this bug depends on, or the bug which this blocks.
 type RelatedBug struct {
 	Id     int64
 	Status int64
@@ -525,7 +524,7 @@ func sortBugs(b *Bagreply, p ListBugPage) (sortType string) {
 			sortBugsByPriority(p.Bugs)
 		case "changed":
 		default:
-			/* No sorting needs to be done. */
+			// No sorting needs to be done.
 		}
 		return order
 	}
@@ -575,8 +574,7 @@ func redirectToProject(b *Bagreply, projectId int64) {
 	http.Redirect(b.w, b.r, projectUrl, http.StatusFound)
 }
 
-/* Update the time of the most recent change of the bug. */
-
+// Update the time of the most recent change of the bug.
 func (b *Bagreply) updateChanged(bugId int64) bool {
 	err := bagzullaDb.UpdateChangedForBug(b.App.db, time.Now(), bugId)
 	if err != nil {
@@ -1195,7 +1193,7 @@ type AddBugPage struct {
 	Description string
 }
 
-/* Display the page for adding a new bug. */
+// Display the page for adding a new bug.
 func addBugPage(b *Bagreply) {
 	var abp AddBugPage
 	var ok bool
@@ -1206,9 +1204,8 @@ func addBugPage(b *Bagreply) {
 	b.runTemplate("add-bug.html", abp)
 }
 
-/* Add a bug with some of the fields filled in.  This is for the case
-   that we want to link to the bug reporting page from other
-   projects. */
+// Add a bug with some of the fields filled in.  This is for the case
+// that we want to link to the bug reporting page from other projects.
 func addAutoBugHandler(b *Bagreply) {
 	auto := b.r.FormValue("auto")
 	if len(auto) > 0 {
@@ -1258,8 +1255,7 @@ func addAutoBugHandler(b *Bagreply) {
 	}
 }
 
-/* Add a bug to any project. */
-
+// Add a bug to any project.
 func addBugHandler(b *Bagreply) {
 	if b.NotLoggedIn() {
 		return
@@ -1316,12 +1312,8 @@ func addBugToProjectHandler(b *Bagreply) {
 }
 
 func (b *Bagreply) redirectToBug(bugid int64) {
-
-	//	return
 	abs := b.AbsRef(b.r.Referer())
 	re := fmt.Sprintf("%s/bug/%d", abs, bugid)
-	//	b.errorPage("Redirect %s %s to ../bug/%d !%s!\n", b.r.Referer(), b.r.URL.Path, bugid, re)
-	//	return
 	http.Redirect(b.w, b.r, re, http.StatusFound)
 }
 
@@ -1498,8 +1490,7 @@ func setBugStatus(b *Bagreply, newStatus int64, bugId int64) bool {
 	return true
 }
 
-/* Allow /one/ or /one/123 or /hone/abc but not anything more. */
-
+// Allow /one/ or /one/123 or /hone/abc but not anything more.
 var AbsToRel = regexp.MustCompile("(^.*?/[^/]+?)(/[^/]+((?:/[^/]*)?))$")
 
 func (b *Bagreply) AbsRef(r string) string {
@@ -1685,7 +1676,7 @@ func assignDirToProject(b *Bagreply, projectId int64, directory string) (err err
 	return bagzullaDb.UpdateDirectoryForProject(b.App.db, directory, projectId)
 }
 
-/* Assign the given part ID to the bug specified. */
+// Assign the given part ID to the bug specified.
 func assignPartToBug(b *Bagreply, bug bagzullaDb.Bug, partid int64) {
 	err := bagzullaDb.UpdatePartIdForBug(b.App.db, partid, bug.BugId)
 	if err != nil {
@@ -1699,7 +1690,7 @@ func assignPartToBug(b *Bagreply, bug bagzullaDb.Bug, partid int64) {
 	b.redirectToBug(bug.BugId)
 }
 
-/* Assign the project ID to the bug specified. */
+// Assign the project ID to the bug specified.
 func (b *Bagreply) assignProjectToBug(bug bagzullaDb.Bug, projectid int64) {
 	if b.NotLoggedIn() {
 		return
@@ -1910,7 +1901,7 @@ func changeBugProjectHandler(b *Bagreply) {
 	b.runTemplate("change-bug-project.html", cbp)
 }
 
-/* Add a part to a project based on the form input. */
+// Add a part to a project based on the form input.
 func addPartToProjectHandler(b *Bagreply) {
 	if b.NotLoggedIn() {
 		return
@@ -2191,12 +2182,12 @@ func search(b *Bagreply) {
 	b.runTemplate("search.html", s)
 }
 
-/* Show recent changes in the bug tracker. */
+// Show recent changes in the bug tracker.
 func recent(b *Bagreply) {
-	/* Default to twenty recent bugs. */
+	// Default to twenty recent bugs.
 	var max int64 = 20
-	/* Change the maximum based on the final number in the URL if
-	   there is one. */
+	// Change the maximum based on the final number in the URL if
+	// there is one.
 	m := finalNum.FindStringSubmatch(b.r.URL.Path)
 	if m != nil {
 		var err error
@@ -2220,7 +2211,7 @@ func recent(b *Bagreply) {
 	b.runTemplate("bugs.html", p)
 }
 
-/* Find a comment based on the number. */
+// Find a comment based on the number.
 func findComment(b *Bagreply) (comment bagzullaDb.Comment, ok bool) {
 	commentid, ok := getFinalNum(b)
 	if !ok {
@@ -2240,7 +2231,7 @@ type commentToEdit struct {
 	Text string
 }
 
-/* Edit a comment. */
+// Edit a comment.
 func editComment(b *Bagreply) {
 	if b.NotLoggedIn() {
 		return
@@ -2425,7 +2416,7 @@ func editDuplicates(b *Bagreply) {
 	lb.Duplicates = currentDuplicates
 	// Has anything changed?
 	changed := false
-	/* This is bogus, there should only be one original! */
+	// This is bogus, there should only be one original!
 	originals := b.r.FormValue("originals")
 	if len(originals) > 0 {
 		// Get the originals of the bugs by splitting into numbers.
@@ -2539,7 +2530,7 @@ func Bin() string {
 
 var topDir string
 
-/* The uploaded image files go into this directory. */
+// The uploaded image files go into this directory.
 
 var bugimages = "bugimages"
 var fileDir string = topDir + "/" + bugimages
@@ -2598,7 +2589,7 @@ func upload(b *Bagreply) {
 	}
 	tempFile.Write(fileBytes)
 
-	/* Insert the image into the database. */
+	// Insert the image into the database.
 
 	bugid := r.FormValue("bug-id")
 	if bugid == "" {

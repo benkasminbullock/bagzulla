@@ -25,12 +25,12 @@ to create and populate a database using the schema with
     scripts/init.pl
 
 This requires you to have Perl and the modules `DBI`, `DBD::sqlite`,
-and `JSON::Parse`. It deletes any old database file called
-`bagzulla.db`, then it creates the database file again from the schema
-in `schema.txt` by copying some users from `users.json` in the top
-directory. You'll need to add a name and password for whatever user
-name you want to use, or you can add those directly to the database
-using the `sqlite3` command.
+and `JSON::Parse`. It renames any old database file called
+`bagzulla.db` with the suffix `.backup`, then it creates the database
+file again from the schema in `schema.txt` by copying some users from
+`users.json` in the top directory. You'll need to add a name and
+password for whatever user name you want to use, or you can add those
+directly to the database using the `sqlite3` command.
 
 # STARTING THE SERVER
 

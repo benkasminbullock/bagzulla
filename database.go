@@ -14,7 +14,6 @@ import (
 )
 
 // Prepare an SQL statement.
-
 func PrepareSql(b *Bagreply, sql string) (*sql.Stmt, bool) {
 	stmt, err := b.App.db.Prepare(sql)
 	if err != nil {
@@ -27,7 +26,6 @@ func PrepareSql(b *Bagreply, sql string) (*sql.Stmt, bool) {
 
 // Scan the rows of a list of bugs returned by a query to the database
 // into "bugs".
-
 func scanRows(b *Bagreply, rows *sql.Rows) (bugs []bagzullaDb.Bug, ok bool) {
 	bugs, err := bagzullaDb.BugsFromRows(rows)
 	if err != nil {
@@ -38,7 +36,6 @@ func scanRows(b *Bagreply, rows *sql.Rows) (bugs []bagzullaDb.Bug, ok bool) {
 }
 
 // Make a list of bugs with the specified status.
-
 var statusBugsSql = `
 SELECT * FROM bug WHERE bug.status=? ORDER BY bug.changed DESC 
 `
@@ -68,6 +65,7 @@ UPDATE bug SET part_id=0 WHERE part_id=?
 `
 var setNoPartStmt *sql.Stmt
 
+// Delete a part from a project.
 func deletePart(b *Bagreply) {
 	part, ok := getPart(b)
 	if !ok {
@@ -310,8 +308,8 @@ func BugsByChange(b *Bagreply, m int64) (bugs []bagzullaDb.Bug, ok bool) {
 	return bugs, ok
 }
 
-/* Update the text associated with a particular comment by putting the
-   new text's id number into the database. */
+// Update the text associated with a particular comment by putting the
+// new text's id number into the database.
 
 var updateCommentTextIdSql = `
 UPDATE comment SET txt_id=? WHERE comment_id=?
